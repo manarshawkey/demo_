@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.android.aroundegypt.Data.ExperienceEntry;
 import com.example.android.aroundegypt.Data.ExperienceMapper;
+import com.example.android.aroundegypt.Data.JsonUtils;
 import com.example.android.aroundegypt.Data.NetworkUtils;
 
 import org.json.JSONArray;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,18 +42,12 @@ public class MainActivity extends AppCompatActivity {
         protected Integer doInBackground(Void... voids) {
             try {
                 String response = new NetworkUtils().getAllExperiences();
-                JSONObject jsonObject = new JSONObject(response);
-                JSONArray data = jsonObject.getJSONArray("data");
-                    ArrayList<ExperienceEntry> experiences = new ArrayList<>();
-                    for(int i = 0; i < data.length(); i++){
-                        ExperienceEntry entry = new ExperienceMapper().map(data.getJSONObject(i));
-                        Log.d(LOG_TAG, entry.getTitle());
-                        experiences.add(entry);
-                    }
-                return experiences.size();
+                List<ExperienceEntry> experienceEntries = JsonUtils.extractExperienceEntries(response);
+                return experienceEntries.size();
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
+
             return null;
         }
 

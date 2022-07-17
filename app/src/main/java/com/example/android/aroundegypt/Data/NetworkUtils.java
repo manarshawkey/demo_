@@ -5,6 +5,10 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,6 +16,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NetworkUtils {
 
@@ -43,7 +49,6 @@ public class NetworkUtils {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         int responseCode = urlConnection.getResponseCode();
         if(responseCode != 200) {
-            //Log.d(LOG_TAG, url + " response code: " + responseCode);
             return null;
         }
         StringBuilder response = new StringBuilder();
@@ -56,13 +61,10 @@ public class NetworkUtils {
                 response.append(line);
                 line = bufferedReader.readLine();
             }
-            //Log.d(LOG_TAG, "lineSize: " + line.length());
         }catch (Exception e){
-            //Log.d(LOG_TAG, e.getMessage());
         }
         return response.toString();
     }
-
     public String getRecommendedExperiences() throws IOException {
         URL url = formGetRecommendedExperiencesURL();
         return makeHttpRequest(url);
