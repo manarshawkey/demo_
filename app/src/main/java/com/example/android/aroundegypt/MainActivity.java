@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(LOG_TAG, entry.getTitle());
                         experiences.add(entry);
                     }
-                return response.length();
+                return experiences.size();
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
