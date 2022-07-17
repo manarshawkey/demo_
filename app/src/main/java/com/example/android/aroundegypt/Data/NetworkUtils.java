@@ -43,7 +43,7 @@ public class NetworkUtils {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         int responseCode = urlConnection.getResponseCode();
         if(responseCode != 200) {
-            Log.d(LOG_TAG, url + " response code: " + responseCode);
+            //Log.d(LOG_TAG, url + " response code: " + responseCode);
             return null;
         }
         StringBuilder response = new StringBuilder();
@@ -51,11 +51,14 @@ public class NetworkUtils {
             String line;
             InputStreamReader inputStreamReader = new InputStreamReader(urlConnection.getInputStream());
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            while ((line = bufferedReader.readLine()) != null){
+            line = bufferedReader.readLine();
+            while (line != null){
                 response.append(line);
+                line = bufferedReader.readLine();
             }
+            //Log.d(LOG_TAG, "lineSize: " + line.length());
         }catch (Exception e){
-            Log.d(LOG_TAG, e.getMessage());
+            //Log.d(LOG_TAG, e.getMessage());
         }
         return response.toString();
     }
