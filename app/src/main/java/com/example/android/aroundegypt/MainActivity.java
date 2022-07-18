@@ -48,11 +48,6 @@ public class MainActivity extends AppCompatActivity {
         );
         new LoadExperiencesTask().execute();
 
-
-
-    }
-    private static void updateTextView(int count){
-        mTextView.setText(count + " ");
     }
     private static class LoadExperiencesTask extends AsyncTask<Void, Void, List<List<ExperienceEntry>>>{
 
@@ -77,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<List<ExperienceEntry>> experiences) {
             super.onPostExecute(experiences);
-            //updateTextView(integer);
+
             mRecommendedExperienceAdapter.setExperiencesList(experiences.get(0));
             mRecommendedExperienceRecyclerView.setAdapter(mRecommendedExperienceAdapter);
 
