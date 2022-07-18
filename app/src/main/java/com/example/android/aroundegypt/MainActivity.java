@@ -30,18 +30,17 @@ public class MainActivity extends AppCompatActivity {
     public static final int EXPERIENCE_TYPE_RECOMMENDED = 0;
     public static final int EXPERIENCE_TYPE_DEFAULT = 1;
 
-    private static ExperienceAdapter mRecommendedExperienceAdapter;
-    private static RecyclerView mRecommendedExperienceRecyclerView;
+    private  ExperienceAdapter mRecommendedExperienceAdapter;
+    private  RecyclerView mRecommendedExperienceRecyclerView;
 
-    private static ExperienceAdapter mAllExperiencesAdapter;
-    private static RecyclerView mAllExperiencesRecyclerView;
+    private  ExperienceAdapter mAllExperiencesAdapter;
+    private  RecyclerView mAllExperiencesRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextView = findViewById(R.id.textView);
-
 
         mRecommendedExperienceAdapter = new ExperienceAdapter();
         mRecommendedExperienceRecyclerView = findViewById(R.id.recyclerView_recommendedExperiences);
@@ -93,37 +92,6 @@ public class MainActivity extends AppCompatActivity {
         }
         catch (JSONException | ExecutionException | InterruptedException | IOException e ) {
             e.printStackTrace();
-        }
-    }
-
-    private static class LoadExperiencesTask extends AsyncTask<Void, Void, List<List<ExperienceEntry>>>{
-
-        @Override
-        protected List<List<ExperienceEntry>> doInBackground(Void... voids) {
-            try {
-                List<List<ExperienceEntry>> output = new ArrayList<>();
-                String response = NetworkUtils.getRecommendedExperiences();
-
-                output.add(JsonUtils.extractExperienceEntries(response));
-
-                response = NetworkUtils.getAllExperiences();
-                output.add(JsonUtils.extractExperienceEntries(response));
-                return output;
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<List<ExperienceEntry>> experiences) {
-            super.onPostExecute(experiences);
-
-            mRecommendedExperienceAdapter.setExperiencesList(experiences.get(0));
-            mRecommendedExperienceRecyclerView.setAdapter(mRecommendedExperienceAdapter);
-
-            mAllExperiencesAdapter.setExperiencesList(experiences.get(1));
-            mAllExperiencesRecyclerView.setAdapter(mAllExperiencesAdapter);
         }
     }
 }
