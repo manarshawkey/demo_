@@ -16,7 +16,7 @@ import java.util.List;
 public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.ExperienceViewHolder> {
 
 
-    List<ExperienceEntry> experiences;
+    private List<ExperienceEntry> experiences;
 
     public void setExperiencesList(List<ExperienceEntry> experiences){
         this.experiences = experiences;
