@@ -1,25 +1,17 @@
 package com.example.android.aroundegypt;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.example.android.aroundegypt.Data.ExperienceEntry;
-import com.example.android.aroundegypt.Data.JsonUtils;
-import com.example.android.aroundegypt.Data.NetworkUtils;
 
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,12 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 .get(DefaultExperienceViewModel.class);
         allExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_DEFAULT);
         try {
-            allExperiencesViewModel.getExperiences().observe(this, new Observer<List<ExperienceEntry>>() {
-                @Override
-                public void onChanged(List<ExperienceEntry> experienceEntries) {
-                    mAllExperiencesAdapter.setExperiencesList(experienceEntries);
-                    mAllExperiencesRecyclerView.setAdapter(mAllExperiencesAdapter);
-                }
+            allExperiencesViewModel.getExperiences().observe(this, experienceEntries -> {
+                mAllExperiencesAdapter.setExperiencesList(experienceEntries);
+                mAllExperiencesRecyclerView.setAdapter(mAllExperiencesAdapter);
             });
         }catch (JSONException | ExecutionException | InterruptedException | IOException e){
             e.printStackTrace();
@@ -81,12 +70,9 @@ public class MainActivity extends AppCompatActivity {
         recommendedExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_RECOMMENDED);
         try {
             recommendedExperiencesViewModel.getExperiences().observe(
-                    this, new Observer<List<ExperienceEntry>>() {
-                        @Override
-                        public void onChanged(List<ExperienceEntry> experienceEntries) {
-                            mRecommendedExperienceAdapter.setExperiencesList(experienceEntries);
-                            mRecommendedExperienceRecyclerView.setAdapter(mRecommendedExperienceAdapter);
-                        }
+                    this, experienceEntries -> {
+                        mRecommendedExperienceAdapter.setExperiencesList(experienceEntries);
+                        mRecommendedExperienceRecyclerView.setAdapter(mRecommendedExperienceAdapter);
                     }
             );
         }
