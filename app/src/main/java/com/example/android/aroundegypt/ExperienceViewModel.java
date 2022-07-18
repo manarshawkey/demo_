@@ -1,12 +1,16 @@
 package com.example.android.aroundegypt;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.android.aroundegypt.Data.AppDatabase;
 import com.example.android.aroundegypt.Data.ExperienceEntry;
 import com.example.android.aroundegypt.Data.JsonUtils;
 import com.example.android.aroundegypt.Data.NetworkUtils;
@@ -20,54 +24,87 @@ import java.util.concurrent.ExecutionException;
 
 public abstract class ExperienceViewModel extends ViewModel {
 
+    private static final String LOG_TAG = ExperienceViewModel.class.getSimpleName();
     private  int experienceType;
+    private Context context;
 
+    private static AppDatabase mDB;
     public void setExperienceType(int experienceType) {
         this.experienceType = experienceType;
     }
 
+    public void setContext(Context context){
+        this.context = context;
+    }
     private MutableLiveData<List<ExperienceEntry>> experiences;
-    public LiveData<List<ExperienceEntry>> getExperiences() throws IOException, JSONException, ExecutionException, InterruptedException {
+    public LiveData<List<ExperienceEntry>> getExperiences()
+            throws IOException, JSONException, ExecutionException, InterruptedException {
+
+        mDB = AppDatabase.getInstance(context);
 
         if(experiences == null) {
             experiences = new MutableLiveData<>();
             Integer [] params = new Integer[1];
             params[0] = experienceType;
-            experiences = new LoadData().execute(params).get();
+
+
+            List<ExperienceEntry> retrievedExperiences = new LoadDataLocally().execute(params).get();
+
+            if(retrievedExperiences == null || retrievedExperiences.size() == 0){
+                experiences = new LoadData().execute(params).get();
+            }else {
+                experiences.postValue(retrievedExperiences);
+            }
         }
         return experiences;
     }
-    class LoadData extends AsyncTask<Integer, Void, MutableLiveData<List<ExperienceEntry>>>{
+    static class LoadDataLocally extends AsyncTask<Integer, Void, List<ExperienceEntry>>{
+
+        @Override
+        protected List<ExperienceEntry> doInBackground(Integer... integers) {
+
+            Log.d(LOG_TAG, "loading data from the local database");
+            List<ExperienceEntry> retrievedExperiences = null;
+            if(integers[0] == MainActivity.EXPERIENCE_TYPE_DEFAULT){
+                retrievedExperiences = mDB.experienceDAO().getAllExperiences();
+            }
+            if(integers[0] == MainActivity.EXPERIENCE_TYPE_RECOMMENDED){
+                retrievedExperiences = mDB.experienceDAO().getRecommendedExperiences();
+            }
+            return retrievedExperiences;
+        }
+    }
+    static class LoadData extends AsyncTask<Integer, Void, MutableLiveData<List<ExperienceEntry>>>{
 
         @Override
         protected MutableLiveData<List<ExperienceEntry>> doInBackground(Integer... integers) {
+
+            Log.d(LOG_TAG, "loading data from the backend");
             String response = null;
-            switch (integers[0]) {
-                case MainActivity.EXPERIENCE_TYPE_RECOMMENDED:
-                    try {
+            List<ExperienceEntry> experiences = null;
+            MutableLiveData<List<ExperienceEntry>> liveDataExperiences = new MutableLiveData<>();
+            try {
+                switch (integers[0]) {
+                    case MainActivity.EXPERIENCE_TYPE_RECOMMENDED:
                         response = NetworkUtils.getRecommendedExperiences();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case MainActivity.EXPERIENCE_TYPE_DEFAULT:
-                    try {
-                        response = NetworkUtils.getAllExperiences();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                default:
-                    break;
-            }
-            if (response != null && !response.equals("")) {
-                try {
-                    experiences.postValue(JsonUtils.extractExperienceEntries(response));
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        break;
+                    case MainActivity.EXPERIENCE_TYPE_DEFAULT:
+                            response = NetworkUtils.getAllExperiences();
+                        break;
+                    default:
+                        break;
                 }
+                if (response != null && !response.equals("")) {
+                    experiences = JsonUtils.extractExperienceEntries(response);
+                    liveDataExperiences.postValue(experiences);
+                }
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
             }
-            return experiences;
+
+            mDB.experienceDAO().insert(experiences);
+            return liveDataExperiences;
         }
     }
+
 }

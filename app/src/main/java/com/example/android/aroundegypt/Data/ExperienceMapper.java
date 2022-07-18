@@ -13,10 +13,12 @@ public class ExperienceMapper implements JsonMapper<ExperienceEntry>{
         String coverPhotoUrl = jsonObject.optString("cover_photo");
         int views = jsonObject.getInt("views_no");
         int likes = jsonObject.getInt("likes_no");
+        int recommended = jsonObject.getInt("recommended");
 
-        ExperienceEntry entry = new ExperienceEntry(id, title, description, coverPhotoUrl);
+        ExperienceEntry entry = new ExperienceEntry(id, title, description, coverPhotoUrl, recommended);
         entry.setViews_no(views);
         entry.setLikes_no(likes);
+        entry.setRecommended(recommended);
         return entry;
     }
 }

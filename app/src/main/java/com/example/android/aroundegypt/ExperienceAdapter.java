@@ -27,8 +27,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         Context context = parent.getContext();
         int listItemLayoutId = R.layout.experience_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
-        boolean attachToParentImmediately = false;
-        View view = inflater.inflate(listItemLayoutId, parent, attachToParentImmediately);
+        View view = inflater.inflate(listItemLayoutId, parent, false);
 
 
         return new ExperienceViewHolder(view);
@@ -39,7 +38,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         ExperienceEntry currentExperience = experiences.get(position);
         holder.experienceName.setText(currentExperience.getTitle());
         holder.likesNo.setText(String.valueOf(currentExperience.getLikes_no()));
-        //holder.viewsNo.setText(String.valueOf(currentExperience.getViews_no()));
+        holder.viewsNo.setText(String.valueOf(currentExperience.getViews_no()));
     }
 
    // @Override
@@ -60,7 +59,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
             super(itemView);
             experienceName = itemView.findViewById(R.id.textView_experienceName);
             likesNo = itemView.findViewById(R.id.textView_likesNo);
-            //viewsNo = itemView.findViewById(R.id.textView_viewsNo);
+            viewsNo = itemView.findViewById(R.id.textView_viewsNo);
         }
     }
 }

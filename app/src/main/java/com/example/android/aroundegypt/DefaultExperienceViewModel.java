@@ -1,6 +1,7 @@
 package com.example.android.aroundegypt;
 
-public class DefaultExperienceViewModel extends ExperienceViewModel{
+import android.content.Context;
 
+public class DefaultExperienceViewModel extends ExperienceViewModel{
 
 }

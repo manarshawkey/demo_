@@ -46,14 +46,16 @@ public class MainActivity extends AppCompatActivity {
                 new LinearLayoutManager(this)
         );
 
-        setUpRecommendedExperienceViewModel();
         setUpAllExperiencesViewModel();
+        setUpRecommendedExperienceViewModel();
+
     }
 
     private void setUpAllExperiencesViewModel() {
         ExperienceViewModel allExperiencesViewModel = new ViewModelProvider(this)
                 .get(DefaultExperienceViewModel.class);
         allExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_DEFAULT);
+        allExperiencesViewModel.setContext(this);
         try {
             allExperiencesViewModel.getExperiences().observe(this, experienceEntries -> {
                 mAllExperiencesAdapter.setExperiencesList(experienceEntries);
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         ExperienceViewModel recommendedExperiencesViewModel = new ViewModelProvider(this)
                 .get(RecommendedExperienceViewModel.class);
         recommendedExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_RECOMMENDED);
+        recommendedExperiencesViewModel.setContext(this);
         try {
             recommendedExperiencesViewModel.getExperiences().observe(
                     this, experienceEntries -> {

@@ -1,14 +1,26 @@
 package com.example.android.aroundegypt.Data;
 
+
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity (tableName = "experience")
 public class ExperienceEntry {
+    @NonNull
+    @PrimaryKey
     private final String id;
+
     private final String title;
     private final String description;
     private final String cover_photo_url;
     private int views_no;
     private int likes_no;
+    private int recommended;
 
 
+    public String getId(){return id;}
     public String getTitle() {
         return title;
     }
@@ -24,7 +36,9 @@ public class ExperienceEntry {
     public int getLikes_no() {
         return likes_no;
     }
+    public int getRecommended(){return recommended;}
 
+    @Ignore
     public ExperienceEntry(String id, String title, String description,
                            String cover_photo_url){
         this.id = id;
@@ -32,11 +46,20 @@ public class ExperienceEntry {
         this.description = description;
         this.cover_photo_url = cover_photo_url;
     }
+    public ExperienceEntry(String id, String title, String description,
+                           String cover_photo_url, int recommended){
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.cover_photo_url = cover_photo_url;
+        this.recommended = recommended;
+    }
     public void setViews_no(int views){
         this.views_no = views;
     }
     public void setLikes_no(int likes){
         this.likes_no = likes;
     }
+    public void setRecommended(int recommended){ this.recommended = recommended;}
 
 }
