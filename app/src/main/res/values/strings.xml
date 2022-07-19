@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Around Egypt</string>
+    <string name="label_description">Description</string>
 </resources>

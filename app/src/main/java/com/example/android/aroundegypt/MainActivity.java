@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static TextView mTextView;
+
+    public static final String SERIALIZABLE_EXPERIENCE_ENTRY = "serializableExperienceEntry";
 
     public static final int EXPERIENCE_TYPE_RECOMMENDED = 0;
     public static final int EXPERIENCE_TYPE_DEFAULT = 1;
@@ -95,5 +98,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onListItemClick(ExperienceEntry clickedExperience) {
         Toast.makeText(this, clickedExperience.getTitle(), Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(SERIALIZABLE_EXPERIENCE_ENTRY, clickedExperience);
+        Intent openDetailActivityIntent = new Intent(MainActivity.this, ExperienceDetailActivity.class);
+        openDetailActivityIntent.putExtras(bundle);
+        startActivity(openDetailActivityIntent);
     }
 }

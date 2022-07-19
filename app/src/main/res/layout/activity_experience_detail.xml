@@ -7,4 +7,116 @@
     android:layout_height="match_parent"
     tools:context=".ExperienceDetailActivity">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <ImageView
+      android:id="@+id/imageView_experiencePhoto"
+      android:layout_width="406dp"
+      android:layout_height="195dp"
+      android:layout_marginTop="48dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.487"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:srcCompat="@tools:sample/avatars" />
+
+  <LinearLayout
+      android:id="@+id/linearLayout"
+      android:layout_width="410dp"
+      android:layout_height="89dp"
+      android:layout_marginTop="40dp"
+      android:orientation="horizontal"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageView_experiencePhoto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+      <TextView
+          android:id="@+id/textView_experienceName"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="2"
+          android:text="Experience Name" />
+
+      <TextView
+          android:id="@+id/textView_location"
+          android:layout_width="237dp"
+          android:layout_height="wrap_content"
+          android:text="Aswan, Egypt."></TextView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="227dp"
+        android:layout_height="25dp"
+        android:layout_weight="1">
+
+      <ImageView
+          android:id="@+id/imageView_upload"
+          android:layout_width="15dp"
+          android:layout_height="26dp"
+          android:layout_weight="1"
+          app:srcCompat="@drawable/ic_upload" />
+
+      <ImageView
+          android:id="@+id/imageView_like"
+          android:layout_width="10dp"
+          android:layout_height="27dp"
+          android:layout_weight="1"
+          app:srcCompat="@drawable/ic_heart" />
+
+      <TextView
+          android:id="@+id/textView_likesNo"
+          android:layout_width="wrap_content"
+          android:layout_height="27dp"
+          android:layout_weight="1"
+          android:text="45"
+          android:textAlignment="center" />
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="414dp"
+      android:layout_height="272dp"
+      android:layout_marginTop="32dp"
+      android:orientation="vertical"
+      android:paddingStart="16dp"
+      android:paddingTop="0dp"
+      android:paddingEnd="16dp"
+      android:paddingBottom="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+      app:layout_constraintVertical_bias="0.0">
+
+    <TextView
+        android:id="@+id/textView_descriptionLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/cardview_dark_background"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_descriptionDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/cardview_dark_background"
+        android:textStyle="bold" />
+  </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
