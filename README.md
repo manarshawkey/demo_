@@ -7,9 +7,10 @@ Complete requirements:\
  Horizontal list for recommended experiences\
  Vertical list for recent experience\
  Clickable experience item
+ Data available online and offline
  
 Missing requirements:\
  functional Like button\
- load images offline
+ more ui polish
  
  
