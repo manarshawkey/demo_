@@ -23,6 +23,10 @@ public class ExperienceDetailActivity extends AppCompatActivity {
         ExperienceEntry currentExperience = (ExperienceEntry) getIntent()
                 .getSerializableExtra(MainActivity.SERIALIZABLE_EXPERIENCE_ENTRY);
 
+        populateViews(currentExperience);
+    }
+
+    private void populateViews(ExperienceEntry currentExperience) {
         mTextView_experienceName = findViewById(R.id.textView_experienceName);
         mTextView_experienceDetailedDesc = findViewById(R.id.textView_descriptionDetails);
         mTextView_likesNo = findViewById(R.id.textView_likesNo);
