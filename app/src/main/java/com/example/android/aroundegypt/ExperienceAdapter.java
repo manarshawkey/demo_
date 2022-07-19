@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.aroundegypt.Data.ExperienceEntry;
+import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
 
 import java.util.List;
 

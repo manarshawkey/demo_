@@ -1,9 +1,10 @@
-package com.example.android.aroundegypt.Data;
+package com.example.android.aroundegypt.Data.Database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+
 
 import java.util.List;
 
@@ -19,5 +20,5 @@ public interface ExperienceDAO {
     void deleteAllExperiences();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    public long [] insert(List<ExperienceEntry> experienceEntries);
+    long [] insert(List<ExperienceEntry> experienceEntries);
 }

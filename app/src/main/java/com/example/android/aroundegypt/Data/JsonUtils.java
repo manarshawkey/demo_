@@ -1,5 +1,7 @@
 package com.example.android.aroundegypt.Data;
 
+import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,24 +1,22 @@
-package com.example.android.aroundegypt;
+package com.example.android.aroundegypt.ViewModels;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.android.aroundegypt.Data.AppDatabase;
-import com.example.android.aroundegypt.Data.ExperienceEntry;
+import com.example.android.aroundegypt.Data.Database.AppDatabase;
+import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
 import com.example.android.aroundegypt.Data.JsonUtils;
-import com.example.android.aroundegypt.Data.NetworkUtils;
+import com.example.android.aroundegypt.Data.Network.NetworkUtils;
+import com.example.android.aroundegypt.MainActivity;
 
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 

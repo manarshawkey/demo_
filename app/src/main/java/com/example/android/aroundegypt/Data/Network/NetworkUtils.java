@@ -1,6 +1,4 @@
-package com.example.android.aroundegypt.Data;
-
-import android.util.Log;
+package com.example.android.aroundegypt.Data.Network;
 
 import androidx.annotation.Nullable;
 

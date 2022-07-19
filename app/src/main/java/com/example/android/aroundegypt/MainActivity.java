@@ -10,7 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.android.aroundegypt.Data.ExperienceEntry;
+import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
+import com.example.android.aroundegypt.ViewModels.DefaultExperienceViewModel;
+import com.example.android.aroundegypt.ViewModels.ExperienceViewModel;
+import com.example.android.aroundegypt.ViewModels.RecommendedExperienceViewModel;
 
 import org.json.JSONException;
 

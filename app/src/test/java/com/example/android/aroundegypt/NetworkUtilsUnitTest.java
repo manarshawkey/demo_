@@ -1,19 +1,13 @@
 package com.example.android.aroundegypt;
-import android.util.Log;
 
-import com.example.android.aroundegypt.Data.ExperienceEntry;
-import com.example.android.aroundegypt.Data.ExperienceMapper;
-import com.example.android.aroundegypt.Data.NetworkUtils;
-import com.example.android.aroundegypt.Data.URLProvider;
+import com.example.android.aroundegypt.Data.Network.NetworkUtils;
+import com.example.android.aroundegypt.Data.Network.URLProvider;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 
 public class NetworkUtilsUnitTest {
 

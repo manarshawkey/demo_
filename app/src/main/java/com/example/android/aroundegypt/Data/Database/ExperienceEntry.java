@@ -1,4 +1,4 @@
-package com.example.android.aroundegypt.Data;
+package com.example.android.aroundegypt.Data.Database;
 
 
 import androidx.annotation.NonNull;
