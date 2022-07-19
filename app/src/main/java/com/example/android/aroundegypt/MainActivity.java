@@ -48,12 +48,14 @@ public class MainActivity extends AppCompatActivity
         //mTextView = findViewById(R.id.textView);
 
         mRecommendedExperienceAdapter = new ExperienceAdapter(this);
+        mRecommendedExperienceAdapter.setContext(this);
         mRecommendedExperienceRecyclerView = findViewById(R.id.recyclerView_recommendedExperiences);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL, false);
         mRecommendedExperienceRecyclerView.setLayoutManager(linearLayoutManager);
 
         mAllExperiencesAdapter = new ExperienceAdapter(this);
+        mAllExperiencesAdapter.setContext(this);
         mAllExperiencesRecyclerView = findViewById(R.id.recyclerView_allExperiences);
         mAllExperiencesRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this)
