@@ -55,8 +55,8 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
     @Override
     public void onBindViewHolder(@NonNull ExperienceAdapter.ExperienceViewHolder holder, int position) {
         ExperienceEntry currentExperience = experiences.get(position);
-       // holder.experienceName.setText(currentExperience.getTitle());
-        //holder.likesNo.setText(String.valueOf(currentExperience.getLikes_no()));
+        holder.experienceName.setText(currentExperience.getTitle());
+        holder.likesNo.setText(String.valueOf(currentExperience.getLikes_no()));
         holder.viewsNo.setText(String.valueOf(currentExperience.getViews_no()));
         Picasso.with(context).load(currentExperience.getCover_photo_url())
                 .into(holder.imageView);
@@ -76,8 +76,8 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         public ExperienceViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
-            //experienceName = itemView.findViewById(R.id.textView_experienceName);
-            //likesNo = itemView.findViewById(R.id.textView_likesNo);
+            experienceName = itemView.findViewById(R.id.cardView_experienceName);
+            likesNo = itemView.findViewById(R.id.tv_cardView_likesNo);
             //viewsNo = itemView.findViewById(R.id.textView_viewsNo);
 
             viewsNo = itemView.findViewById(R.id.tv_cardView_viewsNo);
