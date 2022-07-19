@@ -4,9 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +28,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
                         implements ExperienceAdapter.ListItemClickListener{
@@ -27,8 +36,9 @@ public class MainActivity extends AppCompatActivity
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static TextView mTextView;
 
-    public static final String SERIALIZABLE_EXPERIENCE_ENTRY = "serializableExperienceEntry";
+    public static final String SERIALIZABLE_EXPERIENCE_ENTRY = "serializable-experience-entry";
 
+    public final String UPDATE_DATA_WORK_NAME = "update-data-periodically";
     public static final int EXPERIENCE_TYPE_RECOMMENDED = 0;
     public static final int EXPERIENCE_TYPE_DEFAULT = 1;
 
@@ -45,7 +55,6 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().hide();
 
-        //mTextView = findViewById(R.id.textView);
 
         mRecommendedExperienceAdapter = new ExperienceAdapter(this);
         mRecommendedExperienceAdapter.setContext(this);
@@ -64,9 +73,28 @@ public class MainActivity extends AppCompatActivity
         setUpAllExperiencesViewModel();
         setUpRecommendedExperienceViewModel();
 
+        registerPeriodicWork();
     }
 
+    private void registerPeriodicWork(){
+
+        Log.d(LOG_TAG, "registerPeriodicWork()");
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .setRequiresBatteryNotLow(true)
+                .setRequiresStorageNotLow(true).build();
+        PeriodicWorkRequest updataDataWorkRequest =
+                new PeriodicWorkRequest.Builder(UpdateDataWorker.class,
+                        15, TimeUnit.MINUTES)
+                        .setConstraints(constraints).build();
+        WorkManager workManager = WorkManager.getInstance(getApplicationContext());
+        workManager.enqueueUniquePeriodicWork(
+                UPDATE_DATA_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP,updataDataWorkRequest);
+        Log.d(LOG_TAG, "periodic work successful");
+
+    }
     private void setUpAllExperiencesViewModel() {
+        Log.d(LOG_TAG, "setUpAllExperiencesViewModel()");
         ExperienceViewModel allExperiencesViewModel = new ViewModelProvider(this)
                 .get(DefaultExperienceViewModel.class);
         allExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_DEFAULT);

@@ -47,8 +47,12 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-
-
+    //Picasso dependency for image loading
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+
+    // Workmanager dependency
+    def work_version = "2.7.1"
+    implementation "androidx.work:work-runtime:$work_version"
 
 }
