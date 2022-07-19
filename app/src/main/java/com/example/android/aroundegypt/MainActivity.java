@@ -7,14 +7,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.example.android.aroundegypt.Data.ExperienceEntry;
 
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+                        implements ExperienceAdapter.ListItemClickListener{
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static TextView mTextView;
@@ -34,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mTextView = findViewById(R.id.textView);
 
-        mRecommendedExperienceAdapter = new ExperienceAdapter();
+        mRecommendedExperienceAdapter = new ExperienceAdapter(this);
         mRecommendedExperienceRecyclerView = findViewById(R.id.recyclerView_recommendedExperiences);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL, false);
         mRecommendedExperienceRecyclerView.setLayoutManager(linearLayoutManager);
 
-        mAllExperiencesAdapter = new ExperienceAdapter();
+        mAllExperiencesAdapter = new ExperienceAdapter(this);
         mAllExperiencesRecyclerView = findViewById(R.id.recyclerView_allExperiences);
         mAllExperiencesRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this)
@@ -82,5 +86,11 @@ public class MainActivity extends AppCompatActivity {
         catch (JSONException | ExecutionException | InterruptedException | IOException e ) {
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public void onListItemClick(ExperienceEntry clickedExperience) {
+        Toast.makeText(this, clickedExperience.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }

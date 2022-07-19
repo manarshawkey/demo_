@@ -1,6 +1,7 @@
 package com.example.android.aroundegypt;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,19 @@ import java.util.List;
 public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.ExperienceViewHolder> {
 
 
+    public interface ListItemClickListener{
+        void onListItemClick(ExperienceEntry clickedExperience);
+    }
+
+    private static final String  LOG_TAG = ExperienceAdapter.class.getSimpleName();
     private List<ExperienceEntry> experiences;
+    private final ListItemClickListener onClickListener;
+
+
+    public ExperienceAdapter(ListItemClickListener onListItemClickListener){
+
+        this.onClickListener = onListItemClickListener;
+    }
 
     public void setExperiencesList(List<ExperienceEntry> experiences){
         this.experiences = experiences;
@@ -41,25 +54,32 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         holder.viewsNo.setText(String.valueOf(currentExperience.getViews_no()));
     }
 
-   // @Override
-    //public void onBindViewHolder(@NonNull ExperienceAdapter.ExperienceViewHolder holder, int position, @NonNull List<Object> payloads) {
-      //  super.onBindViewHolder(holder, position, payloads);
-    //}
-
     @Override
     public int getItemCount() {
         return experiences.size();
     }
-     static class ExperienceViewHolder extends RecyclerView.ViewHolder{
+
+    class ExperienceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView experienceName;
         TextView likesNo;
         TextView viewsNo;
         public ExperienceViewHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             experienceName = itemView.findViewById(R.id.textView_experienceName);
             likesNo = itemView.findViewById(R.id.textView_likesNo);
             viewsNo = itemView.findViewById(R.id.textView_viewsNo);
         }
-    }
+
+
+         @Override
+         public void onClick(View view) {
+             ExperienceEntry entry = experiences.get(getAbsoluteAdapterPosition());
+             Log.d(LOG_TAG, "onViewClick");
+             onClickListener.onListItemClick(entry);
+         }
+     }
+
+
 }
