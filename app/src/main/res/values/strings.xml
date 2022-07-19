@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Around Egypt</string>
     <string name="label_description">Description</string>
+    <string name="contentDesc_menuIcon">a hamburger menu item</string>
+    <string name="contentDesc_settingsIcon">an icon representing a filter to navigate to settings.</string>
+    <string name="label_welcome">Welcome!</string>
+    <string name="message_welcome">Now you can explore any experience in 360 degrees and get all the details about it all in one place.</string>
 </resources>

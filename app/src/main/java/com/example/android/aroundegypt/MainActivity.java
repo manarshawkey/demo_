@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTextView = findViewById(R.id.textView);
+
+        getSupportActionBar().hide();
+
+        //mTextView = findViewById(R.id.textView);
 
         mRecommendedExperienceAdapter = new ExperienceAdapter(this);
         mRecommendedExperienceRecyclerView = findViewById(R.id.recyclerView_recommendedExperiences);
