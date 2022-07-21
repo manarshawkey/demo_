@@ -95,11 +95,9 @@ public class MainActivity extends AppCompatActivity
         WorkManager workManager = WorkManager.getInstance(getApplicationContext());
         workManager.enqueueUniquePeriodicWork(
                 UPDATE_DATA_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP,updateDataWorkRequest);
-        Log.d(LOG_TAG, "periodic work successful");
 
     }
     private void setUpAllExperiencesViewModel() {
-        Log.d(LOG_TAG, "setUpAllExperiencesViewModel()");
         ExperienceViewModel allExperiencesViewModel = new ViewModelProvider(this)
                 .get(DefaultExperienceViewModel.class);
         allExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_DEFAULT);
