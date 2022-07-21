@@ -1,5 +1,6 @@
 package com.example.android.aroundegypt;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,15 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Constraints;
 import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.NetworkType;
-import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -34,7 +31,7 @@ public class MainActivity extends AppCompatActivity
                         implements ExperienceAdapter.ListItemClickListener{
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static TextView mTextView;
+
 
     public static final String SERIALIZABLE_EXPERIENCE_ENTRY = "serializable-experience-entry";
 
@@ -53,7 +50,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().hide();
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)
+            actionBar.hide();
 
         setUpRecommendedExperienceAdapter();
         setupAllExperiencesAdapter();
