@@ -8,71 +8,6 @@
     tools:context=".MainActivity">
 
 
-
-    <LinearLayout
-        android:id="@+id/layout_welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout_searchBar"
-        app:layout_constraintBottom_toTopOf="@id/scrollView_horizontal">
-
-        <TextView
-            android:id="@+id/textView_welcomeLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:text="@string/label_welcome"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView_welcomeMessage"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:paddingStart="16dp"
-            android:paddingLeft="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="8dp"
-            android:text="@string/message_welcome"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-    </LinearLayout>
-    <ScrollView
-        android:id="@+id/scrollView_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/layout_welcome">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_recommendedExperiences"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical" />
-    </ScrollView>
-
-
-    <ScrollView
-        android:id="@+id/scrollView_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@id/scrollView_horizontal"
-        tools:layout_editor_absoluteX="0dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_allExperiences"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </ScrollView>
-
-
-
     <LinearLayout
         android:id="@+id/linearLayout_searchBar"
         android:layout_width="407dp"
@@ -117,6 +52,88 @@
             app:srcCompat="@drawable/ic_settings_filter" />
     </LinearLayout>
 
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_searchBar">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/listsScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_searchBar">
+
+        <LinearLayout
+            android:id="@+id/layout_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView_welcomeLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:text="@string/label_welcome"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_welcomeMessage"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingStart="16dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:text="@string/message_welcome"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:id="@+id/frameLayout_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_welcome"
+            app:layout_constraintVertical_bias="1.0">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_recommendedExperiences"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameLayout_horizontal"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="-2dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_allExperiences"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 
