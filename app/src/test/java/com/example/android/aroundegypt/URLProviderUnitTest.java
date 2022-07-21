@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-public class NetworkUtilsUnitTest {
+public class URLProviderUnitTest {
 
     @Test
     public void formGetAllExperiencesURL_getsTheCorrectURL() throws MalformedURLException {
