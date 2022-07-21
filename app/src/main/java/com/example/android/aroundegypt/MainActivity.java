@@ -78,18 +78,17 @@ public class MainActivity extends AppCompatActivity
 
     private void registerPeriodicWork(){
 
-        Log.d(LOG_TAG, "registerPeriodicWork()");
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .setRequiresBatteryNotLow(true)
                 .setRequiresStorageNotLow(true).build();
-        PeriodicWorkRequest updataDataWorkRequest =
+        PeriodicWorkRequest updateDataWorkRequest =
                 new PeriodicWorkRequest.Builder(UpdateDataWorker.class,
-                        15, TimeUnit.MINUTES)
+                        1, TimeUnit.DAYS)
                         .setConstraints(constraints).build();
         WorkManager workManager = WorkManager.getInstance(getApplicationContext());
         workManager.enqueueUniquePeriodicWork(
-                UPDATE_DATA_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP,updataDataWorkRequest);
+                UPDATE_DATA_WORK_NAME, ExistingPeriodicWorkPolicy.KEEP,updateDataWorkRequest);
         Log.d(LOG_TAG, "periodic work successful");
 
     }
