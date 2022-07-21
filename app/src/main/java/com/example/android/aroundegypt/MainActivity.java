@@ -55,25 +55,31 @@ public class MainActivity extends AppCompatActivity
 
         getSupportActionBar().hide();
 
+        setUpRecommendedExperienceAdapter();
+        setupAllExperiencesAdapter();
 
-        mRecommendedExperienceAdapter = new ExperienceAdapter(this);
-        mRecommendedExperienceAdapter.setContext(this);
-        mRecommendedExperienceRecyclerView = findViewById(R.id.recyclerView_recommendedExperiences);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
-                this, LinearLayoutManager.HORIZONTAL, false);
-        mRecommendedExperienceRecyclerView.setLayoutManager(linearLayoutManager);
+        setUpAllExperiencesViewModel();
+        setUpRecommendedExperienceViewModel();
 
+        registerPeriodicWork();
+    }
+
+    private void setupAllExperiencesAdapter() {
         mAllExperiencesAdapter = new ExperienceAdapter(this);
         mAllExperiencesAdapter.setContext(this);
         mAllExperiencesRecyclerView = findViewById(R.id.recyclerView_allExperiences);
         mAllExperiencesRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this)
         );
+    }
 
-        setUpAllExperiencesViewModel();
-        setUpRecommendedExperienceViewModel();
-
-        registerPeriodicWork();
+    private void setUpRecommendedExperienceAdapter() {
+        mRecommendedExperienceAdapter = new ExperienceAdapter(this);
+        mRecommendedExperienceAdapter.setContext(this);
+        mRecommendedExperienceRecyclerView = findViewById(R.id.recyclerView_recommendedExperiences);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                this, LinearLayoutManager.HORIZONTAL, false);
+        mRecommendedExperienceRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
     private void registerPeriodicWork(){
