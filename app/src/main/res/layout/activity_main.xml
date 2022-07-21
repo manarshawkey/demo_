@@ -8,49 +8,62 @@
     tools:context=".MainActivity">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout_searchBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_searchBar"
+        android:layout_width="405dp"
+        android:layout_height="70dp"
         android:layout_marginTop="40dp"
         android:orientation="horizontal"
+        android:paddingBottom="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <ImageView
             android:id="@+id/imageView_menu"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="3"
             android:contentDescription="@string/contentDesc_menuIcon"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="16dp"
+            app:barrierMargin="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_menu_burger" />
-
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_weight="1"
-            android:background="@color/cardview_shadow_start_color"
-            android:hint="Try Luxor!"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            />
 
         <ImageView
             android:id="@+id/imageView_setting"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="3"
             android:contentDescription="@string/contentDesc_settingsIcon"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.482"
             app:srcCompat="@drawable/ic_settings_filter" />
-    </LinearLayout>
+
+
+        <SearchView
+            android:layout_width="307dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/rounded_corner"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageView_setting"
+            app:layout_constraintStart_toEndOf="@id/imageView_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
@@ -58,13 +71,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout_searchBar">
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout_searchBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/listsScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/linearLayout_searchBar">
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout_searchBar">
 
             <LinearLayout
                 android:id="@+id/layout_welcome"

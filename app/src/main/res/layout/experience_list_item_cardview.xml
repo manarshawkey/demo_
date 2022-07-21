@@ -36,7 +36,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageView_views"
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="4dp"
@@ -45,7 +45,8 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/ic_views" />
+                app:srcCompat="@drawable/ic_views"
+                android:contentDescription="@string/contentDesc_views" />
 
             <TextView
                 android:id="@+id/tv_cardView_viewsNo"
@@ -100,17 +101,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="266dp"
             android:layout_marginTop="3dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="2dp"
             android:layout_weight="1"
-            android:text="TextView"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintEnd_toStartOf="@+id/imageView_heart"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="likes No" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView_heart"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
@@ -118,7 +119,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_heart" />
+            app:srcCompat="@drawable/ic_heart"
+            android:contentDescription="@string/contentDesc_heartImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

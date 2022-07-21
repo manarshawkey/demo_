@@ -7,4 +7,6 @@
     <string name="message_welcome">Now you can explore any experience in 360 degrees and get all the details about it all in one place.</string>
     <string name="label_recommendedExperiences">Recommended Experiences</string>
     <string name="label_mostRecent">Most Recent</string>
+    <string name="contentDesc_heartImage">An image of a heart</string>
+    <string name="contentDesc_views">An image of an eye, representing the number of views.</string>
 </resources>
