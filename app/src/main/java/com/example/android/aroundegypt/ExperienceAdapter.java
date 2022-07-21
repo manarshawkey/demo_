@@ -1,6 +1,7 @@
 package com.example.android.aroundegypt;
 
 import android.content.Context;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,6 +78,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
             super(itemView);
             itemView.setOnClickListener(this);
             experienceName = itemView.findViewById(R.id.cardView_experienceName);
+            experienceName.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
             likesNo = itemView.findViewById(R.id.tv_cardView_likesNo);
             //viewsNo = itemView.findViewById(R.id.textView_viewsNo);
 

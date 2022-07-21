@@ -77,12 +77,19 @@
         <TextView
             android:id="@+id/cardView_experienceName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="3dp"
+            android:layout_marginBottom="2dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:singleLine="false"
             android:textStyle="bold"
-            app:layout_constraintBaseline_creator="@integer/material_motion_duration_long_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_cardView_likesNo"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Experience Name">
 
         </TextView>
@@ -91,11 +98,13 @@
             android:id="@+id/tv_cardView_likesNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="269dp"
+            android:layout_marginStart="266dp"
             android:layout_marginTop="3dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="2dp"
             android:layout_weight="1"
             android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -106,6 +115,7 @@
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_heart" />
