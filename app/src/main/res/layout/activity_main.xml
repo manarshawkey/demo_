@@ -131,13 +131,28 @@
                     android:scrollbars="vertical" />
             </FrameLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_mostRecentLabel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frameLayout_horizontal"
+                app:layout_constraintBottom_toTopOf="@id/frameLayout_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:text="@string/label_mostRecent"
+                android:textStyle="bold"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:paddingTop="24dp"/>
+
             <FrameLayout
                 android:id="@+id/frameLayout_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/frameLayout_horizontal"
+                app:layout_constraintTop_toBottomOf="@id/textView_mostRecentLabel"
                 app:layout_constraintVertical_bias="0.0"
                 tools:layout_editor_absoluteX="-2dp">
 
