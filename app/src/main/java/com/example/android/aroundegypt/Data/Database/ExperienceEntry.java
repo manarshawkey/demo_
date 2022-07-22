@@ -20,7 +20,7 @@ public class ExperienceEntry implements Serializable {
     private int views_no;
     private int likes_no;
     private int recommended;
-    //private String city;
+    private String city;
 
 
     public String getId(){return id;}
@@ -40,7 +40,7 @@ public class ExperienceEntry implements Serializable {
         return likes_no;
     }
     public int getRecommended(){return recommended;}
-    //public String getCity(){return city;}
+    public String getCity(){return city;}
     @Ignore
     public ExperienceEntry(String id, String title, String description,
                            String cover_photo_url){
@@ -50,12 +50,13 @@ public class ExperienceEntry implements Serializable {
         this.cover_photo_url = cover_photo_url;
     }
     public ExperienceEntry(String id, String title, String description,
-                           String cover_photo_url, int recommended){
+                           String cover_photo_url, int recommended, String city){
         this.id = id;
         this.title = title;
         this.description = description;
         this.cover_photo_url = cover_photo_url;
         this.recommended = recommended;
+        this.city = city;
     }
     public void setViews_no(int views){
         this.views_no = views;
@@ -64,6 +65,6 @@ public class ExperienceEntry implements Serializable {
         this.likes_no = likes;
     }
     public void setRecommended(int recommended){ this.recommended = recommended;}
-   // public void setCity(String city){this.city = city;}
+    public void setCity(String city){this.city = city;}
 
 }

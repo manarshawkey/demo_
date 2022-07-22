@@ -30,12 +30,12 @@ public class ExperienceDetailActivity extends AppCompatActivity {
         mTextView_experienceName = findViewById(R.id.textView_experienceName);
         mTextView_experienceDetailedDesc = findViewById(R.id.textView_descriptionDetails);
         mTextView_likesNo = findViewById(R.id.textView_likesNo);
-
+        mTextView_experienceLocation = findViewById(R.id.textView_location);
 
         mTextView_experienceName.setText(currentExperience.getTitle());
         mTextView_experienceDetailedDesc.setText(currentExperience.getDescription());
         mTextView_likesNo.setText(String.valueOf(currentExperience.getLikes_no()));
-
+        mTextView_experienceLocation.setText(currentExperience.getCity() + ", " + "Egypt");
         imageView_experiencePhoto = findViewById(R.id.imageView_experiencePhoto);
 
         Picasso.with(this).load(currentExperience.getCover_photo_url())
