@@ -74,7 +74,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_recommended"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
@@ -103,6 +103,7 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:paddingEnd="4dp"
+                android:paddingStart="4dp"
                 android:text="@string/label_recommended"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toEndOf="@id/imageView_star"
@@ -111,6 +112,24 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
                 android:textSize="11sp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageView_360_degree"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_360_degree"
+            android:contentDescription="@string/contentDesc_360_degree" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_images"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_gravity="bottom|end"
+            />
 
 
     </androidx.cardview.widget.CardView>
@@ -148,6 +167,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
             android:paddingStart="6dp"
+            android:paddingEnd="6dp"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

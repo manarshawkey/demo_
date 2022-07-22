@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic__60_degree.xml" value="0.121" />
+        <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.218" />
+        <entry key="app/src/main/res/drawable/ic_images.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/ic_info.xml" value="0.205" />
         <entry key="app/src/main/res/drawable/ic_menu_burger.xml" value="0.173" />
         <entry key="app/src/main/res/drawable/ic_star.xml" value="0.121" />
