@@ -69,7 +69,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,15 +79,13 @@
             android:id="@+id/cardView_experienceName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="3dp"
             android:layout_marginBottom="2dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:singleLine="false"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_cardView_likesNo"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@id/guideline4"
+            app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
@@ -98,15 +96,13 @@
         <TextView
             android:id="@+id/tv_cardView_likesNo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="266dp"
-            android:layout_marginTop="3dp"
+            android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="2dp"
-            android:layout_weight="1"
+            android:paddingStart="6dp"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView_heart"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageView_heart"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="likes No" />
 
@@ -114,13 +110,22 @@
             android:id="@+id/imageView_heart"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
             android:layout_weight="1"
+            android:contentDescription="@string/contentDesc_heartImage"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_cardView_likesNo"
+            app:layout_constraintStart_toStartOf="@id/guideline4"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_heart"
-            android:contentDescription="@string/contentDesc_heartImage" />
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ic_heart" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="303dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
