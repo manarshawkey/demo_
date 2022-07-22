@@ -7,7 +7,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {ExperienceEntry.class}, version = 1, exportSchema = false)
+@Database(entities = {ExperienceEntry.class, LikedExperienceEntry.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static final Object LOCK = new Object();
     private static final String DATABASE_NAME = "aroundEgyptDB";
@@ -23,4 +23,5 @@ public abstract class AppDatabase extends RoomDatabase {
         return _instance;
     }
     public abstract ExperienceDAO experienceDAO();
+    public abstract LikedExperienceDAO likedExperienceDAO();
 }

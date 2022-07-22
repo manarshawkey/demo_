@@ -6,18 +6,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.drawable.IconCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Database;
 
+import com.example.android.aroundegypt.Data.AppExecutors;
+import com.example.android.aroundegypt.Data.Database.AppDatabase;
 import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
+import com.example.android.aroundegypt.Data.Database.LikedExperienceEntry;
+import com.example.android.aroundegypt.Data.Database.LoadLikedExperiencesTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.ExperienceViewHolder> {
 
@@ -61,13 +69,35 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         holder.likesNo.setText(String.valueOf(currentExperience.getLikes_no()));
         holder.viewsNo.setText(String.valueOf(currentExperience.getViews_no()));
         Picasso.with(context).load(currentExperience.getCover_photo_url())
-                .into(holder.imageView);
+                .into(holder.experiencePhoto);
 
         if(currentExperience.getRecommended() == MainActivity.EXPERIENCE_TYPE_RECOMMENDED){
             holder.recommendedLayout.setVisibility(View.VISIBLE);
         }else{
             holder.recommendedLayout.setVisibility(View.GONE);
         }
+
+        ImageView likeImageView = holder.likeImage;
+        setCorrectLikeImage(currentExperience.getId(), likeImageView);
+    }
+
+    private void setCorrectLikeImage(String experienceId, ImageView likeImageView) {
+        AppExecutors.getInstance().getDiskIO().execute(() -> {
+            List<LikedExperienceEntry> likedExperiences;
+            likedExperiences = AppDatabase.getInstance(context).likedExperienceDAO().getLikedExperiences();
+            boolean liked = false;
+            for(LikedExperienceEntry likedExperience : likedExperiences){
+                if(likedExperience.getExperienceID().equals(experienceId)){
+                    liked = true;
+                    break;
+                }
+            }
+            if(liked) {
+                likeImageView.setImageDrawable(context.getDrawable(R.drawable.ic_liked_heart));
+            }else{
+                likeImageView.setImageDrawable(context.getDrawable(R.drawable.ic_heart));
+            }
+        });
     }
 
     @Override
@@ -80,7 +110,8 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         TextView experienceName;
         TextView likesNo;
         TextView viewsNo;
-        ImageView imageView;
+        ImageView experiencePhoto;
+        ImageView likeImage;
         ConstraintLayout recommendedLayout;
         public ExperienceViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,9 +122,27 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
             //viewsNo = itemView.findViewById(R.id.textView_viewsNo);
 
             viewsNo = itemView.findViewById(R.id.tv_cardView_viewsNo);
-            imageView = itemView.findViewById(R.id.cardViewImg_experiencePhoto);
+            experiencePhoto = itemView.findViewById(R.id.cardViewImg_experiencePhoto);
             recommendedLayout = itemView.findViewById(R.id.layout_recommended);
 
+
+            likeImage = itemView.findViewById(R.id.imageView_heart);
+            likeImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, "liked", Toast.LENGTH_SHORT).show();
+                    likeImage.setImageDrawable(context.getDrawable(R.drawable.ic_liked_heart));
+
+                    AppExecutors.getInstance().getDiskIO().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            AppDatabase.getInstance(context).likedExperienceDAO().insert(
+                                    new LikedExperienceEntry(experiences.get(getAbsoluteAdapterPosition()).getId()));
+                            Log.d(LOG_TAG, "liking an experience");
+                        }
+                    });
+                }
+            });
         }
 
 
@@ -102,6 +151,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
              ExperienceEntry entry = experiences.get(getAbsoluteAdapterPosition());
              Log.d(LOG_TAG, "onViewClick");
              onClickListener.onListItemClick(entry);
+
          }
      }
 
