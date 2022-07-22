@@ -65,6 +65,8 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
 
         if(currentExperience.getRecommended() == MainActivity.EXPERIENCE_TYPE_RECOMMENDED){
             holder.recommendedLayout.setVisibility(View.VISIBLE);
+        }else{
+            holder.recommendedLayout.setVisibility(View.GONE);
         }
     }
 
