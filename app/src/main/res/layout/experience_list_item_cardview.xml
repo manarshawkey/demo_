@@ -37,11 +37,11 @@
 
             <ImageView
                 android:id="@+id/imageView_views"
-                android:layout_width="32dp"
-                android:layout_height="match_parent"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginRight="4dp"
                 android:layout_weight="1"
@@ -62,6 +62,15 @@
                 android:textStyle="bold"
                 tools:text="9890" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView_info"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            app:srcCompat="@drawable/ic_info" />
 
 
     </androidx.cardview.widget.CardView>
