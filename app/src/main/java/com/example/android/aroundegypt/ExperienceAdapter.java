@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
@@ -61,6 +62,10 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         holder.viewsNo.setText(String.valueOf(currentExperience.getViews_no()));
         Picasso.with(context).load(currentExperience.getCover_photo_url())
                 .into(holder.imageView);
+
+        if(currentExperience.getRecommended() == MainActivity.EXPERIENCE_TYPE_RECOMMENDED){
+            holder.recommendedLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -74,6 +79,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         TextView likesNo;
         TextView viewsNo;
         ImageView imageView;
+        ConstraintLayout recommendedLayout;
         public ExperienceViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
@@ -84,6 +90,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
 
             viewsNo = itemView.findViewById(R.id.tv_cardView_viewsNo);
             imageView = itemView.findViewById(R.id.cardViewImg_experiencePhoto);
+            recommendedLayout = itemView.findViewById(R.id.layout_recommended);
 
         }
 

@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity
     public static final String SERIALIZABLE_EXPERIENCE_ENTRY = "serializable-experience-entry";
 
     public final String UPDATE_DATA_WORK_NAME = "update-data-periodically";
-    public static final int EXPERIENCE_TYPE_RECOMMENDED = 0;
-    public static final int EXPERIENCE_TYPE_DEFAULT = 1;
+    public static final int EXPERIENCE_TYPE_RECOMMENDED = 1;
+    public static final int EXPERIENCE_TYPE_DEFAULT = 0;
 
     private  ExperienceAdapter mRecommendedExperienceAdapter;
     private  RecyclerView mRecommendedExperienceRecyclerView;
