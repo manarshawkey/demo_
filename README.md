@@ -1,16 +1,7 @@
-# demo_
+# OverView
 
-Complete requirements:\
- MVVM architecture\
- Data persistence using Room\
- Fetching data from the backend\
- Horizontal list for recommended experiences\
- Vertical list for recent experience\
- Clickable experience item
- Data available online and offline
- 
-Missing requirements:\
- functional Like button\
- more ui polish
+# Screenshots
+
+<img src="screenshots/1.png" width="250" height="500"> <img src="screenshots/2.png" width="250" height="500"> <img src="screenshots/3.png" width="250" height="500"> <img src="screenshots/4.png" width="250" height="500"> <img src="screenshots/5.png" width="800" height="300">
  
  
