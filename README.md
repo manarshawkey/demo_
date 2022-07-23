@@ -10,7 +10,8 @@ The local database is updated upon fetching the data from the backend. The ui is
 
 # Screenshots
 
-<img src="screenshots/1.png" width="250" height="500">   <img src="screenshots/2.png" width="250" height="500">    <img src="screenshots/3.png" width="250" height="500"> <img src="screenshots/4.png" width="250" height="500">
+<img src="screenshots/1.png" width="250" height="500">   <img src="screenshots/2.png" width="250" height="500">    <img src="screenshots/3.png" width="250" height="500"> <img src="screenshots/4.png" width="250" height="500">. height="500"> <img src="screenshots/7.png" width="250" height="500">
+height="500"> <img src="screenshots/8.png" width="250" height="500">
 
 
 # Notes
