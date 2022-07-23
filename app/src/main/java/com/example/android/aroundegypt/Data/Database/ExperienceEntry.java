@@ -21,6 +21,7 @@ public class ExperienceEntry implements Serializable {
     private int likes_no;
     private int recommended;
     private String city;
+    private boolean likedStatus;
 
 
     public String getId(){return id;}
@@ -41,6 +42,7 @@ public class ExperienceEntry implements Serializable {
     }
     public int getRecommended(){return recommended;}
     public String getCity(){return city;}
+    public boolean getLikedStatus(){return this.likedStatus;}
     @Ignore
     public ExperienceEntry(String id, String title, String description,
                            String cover_photo_url){
@@ -66,5 +68,6 @@ public class ExperienceEntry implements Serializable {
     }
     public void setRecommended(int recommended){ this.recommended = recommended;}
     public void setCity(String city){this.city = city;}
+    public void setLikedStatus(boolean likedStatus){this.likedStatus = likedStatus;}
 
 }

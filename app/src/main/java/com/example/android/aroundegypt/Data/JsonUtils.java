@@ -20,4 +20,9 @@ public class JsonUtils {
         }
         return experiences;
     }
+    public static ExperienceEntry extractSingleExperienceEntry(String response) throws JSONException {
+        JSONObject jsonObject = new JSONObject(response);
+        JSONObject jsonExperience = jsonObject.getJSONObject("data");
+        return new ExperienceMapper().map(jsonExperience);
+    }
 }

@@ -18,13 +18,11 @@ public class URLProviderUnitTest {
     }
     @Test
     public void formGetSingleExperience_getsCorrectURL() throws MalformedURLException {
-        String formedURL = URLProvider.formGetSingleExperienceURL(2).toString();
+        String formedURL = URLProvider.formGetSingleExperienceURL("someStringEcperienceID").toString();
         assert (formedURL.equals("https://aroundegypt.34ml.com/api/v2/experiences/2"));
     }
     @Test
     public void makeHttpRequest_returnsCorrectData() throws IOException, JSONException {
-        String response = NetworkUtils.getAllExperiences();
-        System.out.println("response size: " + response.length());
         //JSONObject jsonObject = new JSONObject(response);
         /*JSONArray data = jsonObject.getJSONArray("data");
         ArrayList<ExperienceEntry> experiences = new ArrayList<>();
@@ -33,6 +31,6 @@ public class URLProviderUnitTest {
             experiences.add(entry);
         }
         System.out.println("experiences count: " + experiences.size());*/
-        System.out.println(response);
+       // System.out.println(response);
     }
 }

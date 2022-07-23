@@ -18,8 +18,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class UpdateDataWorker extends Worker {
+    private final Context context;
     public UpdateDataWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
+        this.context = context;
     }
 
     @NonNull
@@ -27,8 +29,8 @@ public class UpdateDataWorker extends Worker {
     public Result doWork() {
         //fetch the data from the backend
         try {
-            String response = NetworkUtils.getAllExperiences();
-            List<ExperienceEntry> experiences = JsonUtils.extractExperienceEntries(response);
+            //String response = NetworkUtils.getAllExperiences(this.getApplicationContext());
+            List<ExperienceEntry> experiences = NetworkUtils.getAllExperiences(context);
             if(experiences != null && experiences.size() > 0){
                 AppDatabase db = AppDatabase.getInstance(getApplicationContext());
                 //delete all entries from the database

@@ -19,6 +19,12 @@ public interface ExperienceDAO {
     @Query("DELETE FROM experience")
     void deleteAllExperiences();
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Query("SELECT * FROM experience WHERE id = :experienceId")
+    ExperienceEntry getSingleExperience(String experienceId);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     long [] insert(List<ExperienceEntry> experienceEntries);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(ExperienceEntry entry);
 }

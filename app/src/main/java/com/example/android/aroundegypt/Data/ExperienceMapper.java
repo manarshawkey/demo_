@@ -22,6 +22,7 @@ public class ExperienceMapper implements JsonMapper<ExperienceEntry>{
         entry.setViews_no(views);
         entry.setLikes_no(likes);
         entry.setRecommended(recommended);
+        entry.setLikedStatus(false);
         return entry;
     }
 }

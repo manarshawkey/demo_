@@ -10,6 +10,7 @@ public class URLProvider {
     private static final String API_VERSION = "/api/v2";
     private static final String PATH_EXPERIENCES = "/experiences";
     private static final String PARAM_FILTER_RECOMMENDED = "filter[recommended]";
+    private static final String LIKE = "/like";
 
     public static URL formGetAllExperiencesURL() throws MalformedURLException {
         return new URL(BASE_URL + API_VERSION + PATH_EXPERIENCES);
@@ -20,8 +21,11 @@ public class URLProvider {
                 .build();
         return new URL(uri.toString());
     }
-    public static URL formGetSingleExperienceURL(int id) throws MalformedURLException {
+    public static URL formGetSingleExperienceURL(String id) throws MalformedURLException {
         return new URL(BASE_URL + API_VERSION + PATH_EXPERIENCES + '/' + id);
+    }
+    public static URL formLikeAnExperienceURL(String experienceId) throws MalformedURLException {
+        return new URL(BASE_URL + API_VERSION +  PATH_EXPERIENCES + '/' + experienceId + '/' + LIKE);
     }
 
 }

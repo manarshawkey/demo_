@@ -28,9 +28,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
-                        implements ExperienceAdapter.ListItemClickListener{
+                        implements ExperienceAdapter.ListItemClickListener,
+                        ExperienceAdapter.LikeClickListener{
 
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
 
     public static final String SERIALIZABLE_EXPERIENCE_ENTRY = "serializable-experience-entry";
@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity
 
     private  ExperienceAdapter mAllExperiencesAdapter;
     private  RecyclerView mAllExperiencesRecyclerView;
+
+    private ExperienceViewModel mRecommendedExperiencesViewModel;
+    private ExperienceViewModel mAllExperiencesViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupAllExperiencesAdapter() {
-        mAllExperiencesAdapter = new ExperienceAdapter(this);
+        mAllExperiencesAdapter = new ExperienceAdapter(this, this);
         mAllExperiencesAdapter.setContext(this);
         mAllExperiencesRecyclerView = findViewById(R.id.recyclerView_allExperiences);
         mAllExperiencesRecyclerView.setLayoutManager(
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setUpRecommendedExperienceAdapter() {
-        mRecommendedExperienceAdapter = new ExperienceAdapter(this);
+        mRecommendedExperienceAdapter = new ExperienceAdapter(this, this);
         mRecommendedExperienceAdapter.setContext(this);
         mRecommendedExperienceRecyclerView = findViewById(R.id.recyclerView_recommendedExperiences);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
@@ -97,12 +100,12 @@ public class MainActivity extends AppCompatActivity
 
     }
     private void setUpAllExperiencesViewModel() {
-        ExperienceViewModel allExperiencesViewModel = new ViewModelProvider(this)
+        mAllExperiencesViewModel = new ViewModelProvider(this)
                 .get(DefaultExperienceViewModel.class);
-        allExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_DEFAULT);
-        allExperiencesViewModel.setContext(this);
+        mAllExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_DEFAULT);
+        mAllExperiencesViewModel.setContext(this);
         try {
-            allExperiencesViewModel.getExperiences().observe(this, experienceEntries -> {
+            mAllExperiencesViewModel.getExperiences().observe(this, experienceEntries -> {
                 mAllExperiencesAdapter.setExperiencesList(experienceEntries);
                 mAllExperiencesRecyclerView.setAdapter(mAllExperiencesAdapter);
             });
@@ -112,12 +115,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setUpRecommendedExperienceViewModel() {
-        ExperienceViewModel recommendedExperiencesViewModel = new ViewModelProvider(this)
+         mRecommendedExperiencesViewModel = new ViewModelProvider(this)
                 .get(RecommendedExperienceViewModel.class);
-        recommendedExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_RECOMMENDED);
-        recommendedExperiencesViewModel.setContext(this);
+        mRecommendedExperiencesViewModel.setExperienceType(EXPERIENCE_TYPE_RECOMMENDED);
+        mRecommendedExperiencesViewModel.setContext(this);
         try {
-            recommendedExperiencesViewModel.getExperiences().observe(
+            mRecommendedExperiencesViewModel.getExperiences().observe(
                     this, experienceEntries -> {
                         mRecommendedExperienceAdapter.setExperiencesList(experienceEntries);
                         mRecommendedExperienceRecyclerView.setAdapter(mRecommendedExperienceAdapter);
@@ -138,5 +141,17 @@ public class MainActivity extends AppCompatActivity
         Intent openDetailActivityIntent = new Intent(MainActivity.this, ExperienceDetailActivity.class);
         openDetailActivityIntent.putExtras(bundle);
         startActivity(openDetailActivityIntent);
+    }
+
+
+    @Override
+    public void onLikeClick() {
+        try{
+            //force load the live data
+            mAllExperiencesViewModel.getExperiences();
+            mRecommendedExperiencesViewModel.getExperiences();
+        } catch (JSONException | IOException | ExecutionException | InterruptedException e ) {
+            e.printStackTrace();
+        }
     }
 }
