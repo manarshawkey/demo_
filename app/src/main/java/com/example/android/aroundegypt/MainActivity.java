@@ -13,7 +13,6 @@ import androidx.work.WorkManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 
 import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
@@ -29,8 +28,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
                         implements ExperienceAdapter.ListItemClickListener{
-
-
 
     public static final String SERIALIZABLE_EXPERIENCE_ENTRY = "serializable-experience-entry";
 
@@ -134,17 +131,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     @Override
     public void onListItemClick(ExperienceEntry clickedExperience) {
-        Toast.makeText(this, clickedExperience.getTitle(), Toast.LENGTH_SHORT).show();
         Bundle bundle = new Bundle();
         bundle.putSerializable(SERIALIZABLE_EXPERIENCE_ENTRY, clickedExperience);
         Intent openDetailActivityIntent = new Intent(MainActivity.this, ExperienceDetailActivity.class);
         openDetailActivityIntent.putExtras(bundle);
         startActivity(openDetailActivityIntent);
     }
-
-
-
 }

@@ -88,7 +88,6 @@ public class ExperienceDetailActivity extends AppCompatActivity {
     private void configureLikeActionOnLikePressed(ExperienceEntry currentExperience) {
         mImageView_like.setOnClickListener(view -> {
 
-            Toast.makeText(ExperienceDetailActivity.this, "like clicked", Toast.LENGTH_SHORT).show();
             AppExecutors.getInstance().getNetworkIO().execute(() -> {
                 try {
                     AppDatabase db = AppDatabase.getInstance(ExperienceDetailActivity.this);

@@ -2,6 +2,7 @@ package com.example.android.aroundegypt;
 
 import android.content.Context;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.aroundegypt.Data.AppExecutors;
@@ -36,7 +35,7 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         void onListItemClick(ExperienceEntry clickedExperience);
     }
 
-
+    private static final String LOG_TAG = ExperienceAdapter.class.getSimpleName();
     private List<ExperienceEntry> experiences;
     private final ListItemClickListener onClickListener;
     private Context context;
@@ -60,11 +59,9 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
     @Override
     public ExperienceAdapter.ExperienceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        int listItemLayoutId = R.layout.experience_list_item_cardview;
-
+        int listItemLayoutId = R.layout.experience_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(listItemLayoutId, parent, false);
-
         return new ExperienceViewHolder(view);
     }
 
@@ -124,46 +121,35 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
                 experiences.set(getAbsoluteAdapterPosition(), updated);
             });
 
-            likeImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            likeImage.setOnClickListener(view -> {
 
-                    if(experiences.get(getAbsoluteAdapterPosition()).getLikedStatus()){
-                        Toast.makeText(context, "Can't unlike an experience :)", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    String currentExperienceId = experiences.get(getAbsoluteAdapterPosition()).getId();
+                if(experiences.get(getAbsoluteAdapterPosition()).getLikedStatus()){
+                    Toast.makeText(context, "Can't unlike an experience :)", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String currentExperienceId = experiences.get(getAbsoluteAdapterPosition()).getId();
 
-                    //TODO: get the response code of the post call and act accordingly
-                    //send a Post request to like the experience
-                    sendAPostRequestToLikeAnExperience(currentExperienceId);
-
-                    //fetch the updated Experience details from the backend, update
-                    //the local DB, and trigger the LikeClickedListener with the new data
-                    AppExecutors.getInstance().getNetworkIO().execute(() -> {
-                        try {
+                //send a Post request to like the experience
+                //fetch the updated Experience details from the backend, update
+                //the local DB, and trigger the LikeClickedListener with the new data
+                AppExecutors.getInstance().getNetworkIO().execute(() -> {
+                    try {
+                        int responseCode = NetworkUtils.likeAnExperience(currentExperienceId);
+                        if(responseCode == 200) {
                             ExperienceEntry updatedExperience =
                                     NetworkUtils.getSingleExperience(context, currentExperienceId);
                             updatedExperience.setLikedStatus(true);
                             AppDatabase db = AppDatabase.getInstance(context);
                             db.likedExperienceDAO().insert(new LikedExperienceEntry(updatedExperience.getId()));
                             db.experienceDAO().insert(updatedExperience);
-                            //onLikeClickListener.onLikeClick();
                             likesCount.postValue(updatedExperience.getLikes_no());
-                        } catch (JSONException | IOException e) {
-                            e.printStackTrace();
+                        }else{
+                            Log.d(LOG_TAG, "like an Experience post status code: " + responseCode);
                         }
-                    });
-                }
-                private void sendAPostRequestToLikeAnExperience(String currentExperienceId) {
-                    AppExecutors.getInstance().getNetworkIO().execute(() -> {
-                        try {
-                            NetworkUtils.likeAnExperience(currentExperienceId);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                }
+                    } catch (JSONException | IOException e) {
+                        e.printStackTrace();
+                    }
+                });
             });
         }
 
