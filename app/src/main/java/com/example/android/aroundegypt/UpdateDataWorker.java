@@ -9,7 +9,6 @@ import androidx.work.WorkerParameters;
 
 import com.example.android.aroundegypt.Data.Database.AppDatabase;
 import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
-import com.example.android.aroundegypt.Data.JsonUtils;
 import com.example.android.aroundegypt.Data.Network.NetworkUtils;
 
 import org.json.JSONException;

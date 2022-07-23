@@ -1,8 +1,6 @@
 package com.example.android.aroundegypt.ViewModels;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -11,7 +9,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.android.aroundegypt.Data.AppExecutors;
 import com.example.android.aroundegypt.Data.Database.AppDatabase;
 import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
-import com.example.android.aroundegypt.Data.JsonUtils;
 import com.example.android.aroundegypt.Data.Network.NetworkUtils;
 import com.example.android.aroundegypt.MainActivity;
 

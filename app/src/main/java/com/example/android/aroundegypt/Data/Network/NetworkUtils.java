@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import com.example.android.aroundegypt.Data.Database.AppDatabase;
 import com.example.android.aroundegypt.Data.Database.ExperienceEntry;
 import com.example.android.aroundegypt.Data.Database.LikedExperienceEntry;
-import com.example.android.aroundegypt.Data.JsonUtils;
+import com.example.android.aroundegypt.Data.JsonUtils.JsonUtils;
 
 import org.json.JSONException;
 
@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
