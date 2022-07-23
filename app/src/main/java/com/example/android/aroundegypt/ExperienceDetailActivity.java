@@ -15,6 +15,7 @@ public class ExperienceDetailActivity extends AppCompatActivity {
     TextView mTextView_experienceDetailedDesc;
     ImageView imageView_experiencePhoto;
     TextView mTextView_likesNo;
+    TextView mTextView_viewsNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +32,15 @@ public class ExperienceDetailActivity extends AppCompatActivity {
         mTextView_experienceDetailedDesc = findViewById(R.id.textView_descriptionDetails);
         mTextView_likesNo = findViewById(R.id.textView_likesNo);
         mTextView_experienceLocation = findViewById(R.id.textView_location);
+        mTextView_viewsNo = findViewById(R.id.detail_cardView_viewsNo);
+
 
         mTextView_experienceName.setText(currentExperience.getTitle());
         mTextView_experienceDetailedDesc.setText(currentExperience.getDescription());
         mTextView_likesNo.setText(String.valueOf(currentExperience.getLikes_no()));
         mTextView_experienceLocation.setText(currentExperience.getCity() + ", " + "Egypt");
         imageView_experiencePhoto = findViewById(R.id.imageView_experiencePhoto);
+        mTextView_viewsNo.setText(String.valueOf(currentExperience.getViews_no()));
 
         Picasso.with(this).load(currentExperience.getCover_photo_url())
                 .into(imageView_experiencePhoto);

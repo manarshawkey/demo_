@@ -11,4 +11,9 @@
     <string name="contentDesc_views">An image of an eye, representing the number of views.</string>
     <string name="label_recommended">RECOMMENDED</string>
     <string name="contentDesc_360_degree">An image representing 360 degree vision.</string>
+    <string name="contentDesc_upload">An image representing upload.</string>
+    <string name="contentDesc_experiencePhoto">Image of the experience</string>
+    <string name="label_exploreNow">Explore Now</string>
+    <string name="contentDesc_images">An image representing multiple photos.</string>
+    <string name="label_views">views</string>
 </resources>

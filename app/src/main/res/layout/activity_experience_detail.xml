@@ -1,102 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ExperienceDetailActivity">
 
-  <ImageView
-      android:id="@+id/imageView_experiencePhoto"
-      android:layout_width="406dp"
-      android:layout_height="195dp"
-      android:layout_marginTop="48dp"
+  <androidx.cardview.widget.CardView
+      android:id="@+id/detail_cardView_experiencePhoto"
+      android:layout_width="match_parent"
+      android:layout_height="300dp"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.487"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      tools:srcCompat="@tools:sample/avatars" />
+      android:layout_marginBottom="10dp"
+      app:cardElevation="32dp"
+      android:outlineAmbientShadowColor="@color/cardview_dark_background"
+      android:outlineSpotShadowColor="@color/cardview_dark_background"
+      >
 
-  <LinearLayout
-      android:id="@+id/linearLayout"
-      android:layout_width="410dp"
-      android:layout_height="89dp"
-      android:layout_marginTop="40dp"
-      android:orientation="horizontal"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/imageView_experiencePhoto">
-
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView_experiencePhoto"
         android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:contentDescription="@string/contentDesc_experiencePhoto"
+        android:scaleType="centerCrop"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/cardView_images"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        app:srcCompat="@drawable/ic_images"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/contentDesc_images" />
+
+    <TextView
+        android:id="@+id/textView_exploreNow"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:text="@string/label_exploreNow"
+        android:textAllCaps="true"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corner_light_background"
+        android:padding="16dp"
+        android:textColor="@color/orange"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+        android:textStyle="bold"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="0dp">
+
+      <ImageView
+          android:id="@+id/detail_cardView_viewsImage"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:layout_marginBottom="0dp"
+          android:contentDescription="@string/contentDesc_views"
+          android:paddingTop="4dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/ic_views" />
 
       <TextView
-          android:id="@+id/textView_experienceName"
-          android:layout_width="match_parent"
-          android:layout_height="0dp"
-          android:layout_weight="2"
-          android:text="Experience Name" />
-
-      <TextView
-          android:id="@+id/textView_location"
+          android:id="@+id/detail_cardView_viewsNo"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          tools:text="Aswan, Egypt."></TextView>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="227dp"
-        android:layout_height="25dp"
-        android:layout_weight="1">
-
-      <ImageView
-          android:id="@+id/imageView_upload"
-          android:layout_width="15dp"
-          android:layout_height="26dp"
-          android:layout_weight="1"
-          app:srcCompat="@drawable/ic_upload" />
-
-      <ImageView
-          android:id="@+id/imageView_like"
-          android:layout_width="10dp"
-          android:layout_height="27dp"
-          android:layout_weight="1"
-          app:srcCompat="@drawable/ic_heart" />
+          android:layout_marginTop="15dp"
+          android:layout_marginBottom="8dp"
+          android:layout_marginStart="8dp"
+          tools:text="2343"
+          android:textAppearance="@style/ViewsAndLikes"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toEndOf="@id/detail_cardView_viewsImage"
+          tools:layout_editor_absoluteX="33dp" />
 
       <TextView
-          android:id="@+id/textView_likesNo"
+          android:id="@+id/detail_cardView_viewsLabel"
           android:layout_width="wrap_content"
-          android:layout_height="27dp"
-          android:layout_weight="1"
-          android:text="45"
-          android:textAlignment="center" />
-    </LinearLayout>
+          android:layout_height="wrap_content"
+          android:layout_marginTop="15dp"
+          android:layout_marginEnd="1dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginBottom="8dp"
+          android:text="@string/label_views"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toEndOf="@id/detail_cardView_viewsNo"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.0"
+          android:textAppearance="@style/ViewsAndLikes"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.cardview.widget.CardView>
 
-  </LinearLayout>
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/layout1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/detail_cardView_experiencePhoto">
 
-  <LinearLayout
-      android:layout_width="414dp"
-      android:layout_height="272dp"
-      android:layout_marginTop="32dp"
-      android:orientation="vertical"
-      android:paddingStart="16dp"
-      android:paddingTop="0dp"
-      android:paddingEnd="16dp"
-      android:paddingBottom="8dp"
+
+    <TextView
+        android:id="@+id/textView_experienceName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Experience Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/textView_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_experienceName"
+        tools:text="Aswan, Egypt."
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="16sp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"/>
+
+    <ImageView
+        android:id="@+id/imageView_upload"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_upload"
+        android:contentDescription="@string/contentDesc_upload" />
+
+    <ImageView
+        android:id="@+id/imageView_like"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageView_upload"
+        app:layout_constraintTop_toTopOf="@id/imageView_upload"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_heart"
+        android:contentDescription="@string/contentDesc_heartImage" />
+
+    <TextView
+        android:id="@+id/textView_likesNo"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="2dp"
+        android:text="45"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.236"
+        app:layout_constraintStart_toEndOf="@+id/imageView_like"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.434" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="266dp" />
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintTop_toBottomOf="@id/textView_line"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/linearLayout"
       app:layout_constraintVertical_bias="0.0">
 
     <TextView
@@ -104,19 +206,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/cardview_dark_background"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:paddingStart="16dp"/>
 
     <TextView
         android:id="@+id/textView_descriptionDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        tools:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView_descriptionLabel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:fontFamily="sans-serif-medium"
         android:textColor="@color/cardview_dark_background"
-        android:textStyle="bold" />
-  </LinearLayout>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="14sp"/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <TextView
+      android:id="@+id/textView_line"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintTop_toBottomOf="@id/layout1"
+      android:layout_marginTop="16dp"
+      android:background="@color/cardview_shadow_start_color"
+      tools:layout_editor_absoluteY="379dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
