@@ -99,6 +99,7 @@ public class ExperienceDetailActivity extends AppCompatActivity {
                             ExperienceEntry updatedExperience = NetworkUtils.getSingleExperience(
                                     ExperienceDetailActivity.this, currentExperience.getId()
                             );
+                            updatedExperience.setLikedStatus(true);
                             db.experienceDAO().insert(updatedExperience);
                             db.likedExperienceDAO().insert(new LikedExperienceEntry(currentExperience.getId()));
                             int likes = db.experienceDAO().getSingleExperience(currentExperience.getId()).getLikes_no();

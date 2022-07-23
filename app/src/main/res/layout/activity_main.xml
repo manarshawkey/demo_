@@ -154,8 +154,6 @@
                 android:paddingEnd="24dp"
                 android:paddingTop="24dp"/>
 
-
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_allExperiences"
                 android:layout_width="match_parent"

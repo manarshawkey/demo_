@@ -139,4 +139,15 @@ public class MainActivity extends AppCompatActivity
         openDetailActivityIntent.putExtras(bundle);
         startActivity(openDetailActivityIntent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try {
+            mAllExperiencesViewModel.getExperiences();
+            mRecommendedExperiencesViewModel.getExperiences();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
