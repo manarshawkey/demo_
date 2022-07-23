@@ -155,7 +155,7 @@
         android:contentDescription="@string/contentDesc_upload" />
 
     <ImageView
-        android:id="@+id/imageView_like"
+        android:id="@+id/detail_imageView_like"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
@@ -167,18 +167,17 @@
         android:contentDescription="@string/contentDesc_heartImage" />
 
     <TextView
-        android:id="@+id/textView_likesNo"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="2dp"
-        android:text="45"
+        android:id="@+id/detail_textView_likesNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.236"
-        app:layout_constraintStart_toEndOf="@+id/imageView_like"
+        app:layout_constraintStart_toEndOf="@+id/detail_imageView_like"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.434" />
+        app:layout_constraintVertical_bias="0.413"
+        tools:text="45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

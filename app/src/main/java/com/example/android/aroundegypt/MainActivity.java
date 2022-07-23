@@ -28,8 +28,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
-                        implements ExperienceAdapter.ListItemClickListener,
-                        ExperienceAdapter.LikeClickListener{
+                        implements ExperienceAdapter.ListItemClickListener{
 
 
 
@@ -67,7 +66,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupAllExperiencesAdapter() {
-        mAllExperiencesAdapter = new ExperienceAdapter(this, this);
+        mAllExperiencesAdapter = new ExperienceAdapter(this,
+                MainActivity.this);
         mAllExperiencesAdapter.setContext(this);
         mAllExperiencesRecyclerView = findViewById(R.id.recyclerView_allExperiences);
         mAllExperiencesRecyclerView.setLayoutManager(
@@ -76,8 +76,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setUpRecommendedExperienceAdapter() {
-        mRecommendedExperienceAdapter = new ExperienceAdapter(this, this);
+        mRecommendedExperienceAdapter = new ExperienceAdapter(
+                this, MainActivity.this);
         mRecommendedExperienceAdapter.setContext(this);
+        mRecommendedExperienceAdapter.setMainActivityWeakReference(MainActivity.this);
         mRecommendedExperienceRecyclerView = findViewById(R.id.recyclerView_recommendedExperiences);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL, false);
@@ -144,14 +146,5 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onLikeClick() {
-        try{
-            //force load the live data
-            mAllExperiencesViewModel.getExperiences();
-            mRecommendedExperiencesViewModel.getExperiences();
-        } catch (JSONException | IOException | ExecutionException | InterruptedException e ) {
-            e.printStackTrace();
-        }
-    }
+
 }

@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.aroundegypt.Data.AppExecutors;
@@ -24,6 +27,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.ExperienceViewHolder> {
@@ -32,22 +36,22 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         void onListItemClick(ExperienceEntry clickedExperience);
     }
 
-    public interface LikeClickListener{
-        void onLikeClick();
-    }
 
     private List<ExperienceEntry> experiences;
     private final ListItemClickListener onClickListener;
-    private final LikeClickListener onLikeClickListener;
     private Context context;
+    WeakReference<MainActivity> mainActivityWeakReference;
 
+    public void setMainActivityWeakReference(MainActivity mainActivity){
+        mainActivityWeakReference = new WeakReference<>(mainActivity);
+    }
     public void setContext(Context context){ this.context = context;}
 
     public ExperienceAdapter(ListItemClickListener onListItemClickListener,
-                             LikeClickListener onLikeClickListener){
+                             MainActivity mainActivity){
 
         this.onClickListener = onListItemClickListener;
-        this.onLikeClickListener = onLikeClickListener;
+        mainActivityWeakReference = new WeakReference<>(mainActivity);
     }
     public void setExperiencesList(List<ExperienceEntry> experiences){
         this.experiences = experiences;
@@ -103,10 +107,23 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
         ImageView likeImage;
         ConstraintLayout recommendedLayout;
 
+        MutableLiveData<Integer> likesCount = new MutableLiveData<>();
+
         public ExperienceViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             initViews(itemView);
+
+            likesCount.observe(mainActivityWeakReference.get(), integer -> {
+                likeImage.setImageDrawable(AppCompatResources.getDrawable(context,
+                        R.drawable.ic_liked_heart));
+                likesNo.setText(String.valueOf(integer));
+                ExperienceEntry updated = experiences.get(getAbsoluteAdapterPosition());
+                updated.setLikedStatus(true);
+                updated.setLikes_no(integer);
+                experiences.set(getAbsoluteAdapterPosition(), updated);
+            });
+
             likeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -115,7 +132,6 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
                         Toast.makeText(context, "Can't unlike an experience :)", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    likeImage.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_liked_heart));
                     String currentExperienceId = experiences.get(getAbsoluteAdapterPosition()).getId();
 
                     //TODO: get the response code of the post call and act accordingly
@@ -132,7 +148,8 @@ public class ExperienceAdapter extends RecyclerView.Adapter<ExperienceAdapter.Ex
                             AppDatabase db = AppDatabase.getInstance(context);
                             db.likedExperienceDAO().insert(new LikedExperienceEntry(updatedExperience.getId()));
                             db.experienceDAO().insert(updatedExperience);
-                            onLikeClickListener.onLikeClick();
+                            //onLikeClickListener.onLikeClick();
+                            likesCount.postValue(updatedExperience.getLikes_no());
                         } catch (JSONException | IOException e) {
                             e.printStackTrace();
                         }

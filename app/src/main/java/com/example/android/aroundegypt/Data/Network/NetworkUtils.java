@@ -60,13 +60,14 @@ public class NetworkUtils {
         URL url = URLProvider.formGetSingleExperienceURL(experienceID);
         return makeHttpGETRequest(url);
     }
-    public static void likeAnExperience(String experienceId) throws IOException {
+    public static int likeAnExperience(String experienceId) throws IOException {
         URL url = URLProvider.formLikeAnExperienceURL(experienceId);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
         httpURLConnection.setRequestMethod("POST");
         int responseCode = httpURLConnection.getResponseCode();
         Log.d(LOG_TAG, " " + responseCode);
         Log.d(LOG_TAG, httpURLConnection.getResponseMessage());
+        return responseCode;
     }
 
 
